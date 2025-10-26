@@ -15,7 +15,6 @@ import { Toaster } from "~/components/ui/sonner";
 import { env } from "~/env";
 import { getLocale, setLocale } from "~/i18n/runtime";
 import { getUserProfileQuery } from "~/queries/user";
-import { queryClient } from "~/queryClient";
 import { getUserSession } from "~/server/auth.server";
 import appCss from "~/styles/globals.css?url";
 import { detectLanguageOnClient } from "~/utils/i18n";
@@ -53,16 +52,14 @@ interface AppRouterContext {
 }
 
 export const Route = createRootRouteWithContext<AppRouterContext>()({
-  beforeLoad: async ({ context }) => {
+  beforeLoad: async () => {
     const session = (await getUserSession()) as AppSession | undefined;
     return {
-      ...context,
-      queryClient,
       session,
     };
   },
   loader: async ({ context }) => {
-    const { session } = context;
+    const { session, queryClient } = context;
     if (session && session.isAuthenticated) {
       await queryClient.ensureQueryData(getUserProfileQuery);
     }

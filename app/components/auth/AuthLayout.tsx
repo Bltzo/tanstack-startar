@@ -24,7 +24,7 @@ export function AuthLayout({ children }: AuthLayoutProps) {
       <div className="bg-muted/50 hidden flex-col items-center justify-center p-12 lg:flex xl:p-16">
         <div className="w-full max-w-[480px] text-center">
           <Logo className="mx-auto mb-12" />
-          <h1 className="text-foreground mb-6 text-[56px] leading-[1.1] font-semibold">
+          <h1 className="text-foreground mb-6 text-[56px] font-semibold leading-[1.1]">
             {m.authLayoutTitle()}
           </h1>
           <p className="text-muted-foreground text-lg">{m.authLayoutBody()}</p>

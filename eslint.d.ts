@@ -31,6 +31,9 @@ declare module "eslint-plugin-react-hooks" {
       rules: {
         "rules-of-hooks": Linter.RuleEntry;
         "exhaustive-deps": Linter.RuleEntry;
+        "set-state-in-effect": Linter.RuleEntry;
+        purity: Linter.RuleEntry;
+        refs: Linter.RuleEntry;
       };
     };
   };

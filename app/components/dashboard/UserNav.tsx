@@ -50,7 +50,7 @@ export function UserNav() {
         <DropdownMenuContent className="w-56" align="end">
           <DropdownMenuLabel>
             <div className="flex flex-col space-y-1">
-              <p className="text-sm leading-none font-medium">{data?.name}</p>
+              <p className="text-sm font-medium leading-none">{data?.name}</p>
               <p className="text-muted-foreground text-xs leading-none">
                 {data?.email}
               </p>

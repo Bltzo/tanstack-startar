@@ -98,6 +98,9 @@ const reactConfig = [
       ...reactPlugin.configs["jsx-runtime"].rules,
       ...hooksPlugin.configs.recommended.rules,
       ...jsx11yPlugin.configs.recommended.rules,
+      "react-hooks/set-state-in-effect": "warn",
+      "react-hooks/purity": "warn",
+      "react-hooks/refs": "warn",
     },
     languageOptions: {
       globals: {
