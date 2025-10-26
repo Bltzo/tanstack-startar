@@ -13,19 +13,13 @@ import { ThemeProvider } from "next-themes";
 import type { AppSession } from "~/utils/session";
 import { Toaster } from "~/components/ui/sonner";
 import { env } from "~/env";
-import { getLocale, setLocale } from "~/i18n/runtime";
+import { getLocale } from "~/i18n/runtime";
 import { getUserProfileQuery } from "~/queries/user";
 import { getUserSession } from "~/server/auth.server";
 import appCss from "~/styles/globals.css?url";
-import { detectLanguageOnClient } from "~/utils/i18n";
 import { DefaultCatchBoundary } from "../components/DefaultCatchBoundary";
 import { NotFound } from "../components/NotFound";
 import { seo } from "../utils/seo";
-
-if (typeof window !== "undefined") {
-  const language = detectLanguageOnClient();
-  setLocale(language);
-}
 
 const TanStackRouterDevtools = env.PROD
   ? () => null // Render nothing in production
@@ -146,10 +140,10 @@ function RootDocument({ children }: RootDocumentProps) {
       lang={lang}
       dir={lang.startsWith("ar") ? "rtl" : "ltr"}
     >
-      <head>
-        <HeadContent />
-      </head>
       <body>
+        <head>
+          <HeadContent />
+        </head>
         <ThemeProvider attribute="class" enableColorScheme enableSystem>
           {children}
           <Toaster />

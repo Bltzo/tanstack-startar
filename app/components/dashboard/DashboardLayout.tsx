@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { LocaleSwitcher } from "../theme/LanguageSwitcher";
 import { ThemeToggle } from "../theme/ThemeToggle";
 import { MainNav } from "./MainNav";
 import { Search } from "./Search";
@@ -20,6 +21,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           <div className="ml-auto flex items-center gap-4">
             <Search />
             <ThemeToggle />
+            <LocaleSwitcher />
             <UserNav />
           </div>
         </div>
