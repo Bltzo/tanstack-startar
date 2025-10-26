@@ -1,6 +1,6 @@
-import { createServerFn } from "@tanstack/start";
+import { createServerFn } from "@tanstack/react-start";
+import { setResponseStatus } from "@tanstack/react-start/server";
 import * as v from "valibot";
-import { setResponseStatus } from "vinxi/http";
 
 import type { LoginSchemaInput, RegisterSchemaOutput } from "~/schema/auth";
 import type { AppSession } from "~/utils/session";
@@ -17,7 +17,7 @@ export const getUserSession = createServerFn({ method: "GET" }).handler(
 );
 
 export const login = createServerFn({ method: "POST" })
-  .validator((payload: LoginSchemaInput) => v.parse(loginSchema, payload))
+  .inputValidator((payload: LoginSchemaInput) => v.parse(loginSchema, payload))
   .handler(async ({ data }) => {
     try {
       const session = await getAppSession();
@@ -38,7 +38,7 @@ export const login = createServerFn({ method: "POST" })
   });
 
 export const register = createServerFn({ method: "POST" })
-  .validator((payload: RegisterSchemaOutput) =>
+  .inputValidator((payload: RegisterSchemaOutput) =>
     v.parse(registerSchema, payload),
   )
   .handler(async ({ data }) => {

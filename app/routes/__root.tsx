@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import type { QueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import { lazy, Suspense } from "react";
@@ -12,7 +13,7 @@ import { ThemeProvider } from "next-themes";
 import type { AppSession } from "~/utils/session";
 import { Toaster } from "~/components/ui/sonner";
 import { env } from "~/env";
-import { languageTag, setLanguageTag } from "~/i18n/runtime";
+import { getLocale, setLocale } from "~/i18n/runtime";
 import { getUserProfileQuery } from "~/queries/user";
 import { queryClient } from "~/queryClient";
 import { getUserSession } from "~/server/auth.server";
@@ -24,14 +25,14 @@ import { seo } from "../utils/seo";
 
 if (typeof window !== "undefined") {
   const language = detectLanguageOnClient();
-  setLanguageTag(language);
+  setLocale(language);
 }
 
 const TanStackRouterDevtools = env.PROD
   ? () => null // Render nothing in production
   : lazy(() =>
       // Lazy load in development
-      import("@tanstack/router-devtools").then((res) => ({
+      import("@tanstack/react-router-devtools").then((res) => ({
         default: res.TanStackRouterDevtools,
         // For Embedded Mode
         // default: res.TanStackRouterDevtoolsPanel
@@ -140,7 +141,7 @@ interface RootDocumentProps {
 }
 
 function RootDocument({ children }: RootDocumentProps) {
-  const lang = languageTag();
+  const lang = getLocale();
 
   return (
     <html
