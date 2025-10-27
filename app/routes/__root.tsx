@@ -117,6 +117,7 @@ export const Route = createRootRouteWithContext<AppRouterContext>()({
   },
   notFoundComponent: () => <NotFound />,
   component: RootComponent,
+  shellComponent: RootDocument,
 });
 
 function RootComponent() {
@@ -140,10 +141,10 @@ function RootDocument({ children }: RootDocumentProps) {
       lang={lang}
       dir={lang.startsWith("ar") ? "rtl" : "ltr"}
     >
+      <head>
+        <HeadContent />
+      </head>
       <body>
-        <head>
-          <HeadContent />
-        </head>
         <ThemeProvider attribute="class" enableColorScheme enableSystem>
           {children}
           <Toaster />

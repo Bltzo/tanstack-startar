@@ -18,7 +18,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       <header className="border-b border-border">
         <div className="flex h-16 items-center gap-4 px-4">
           <MainNav />
-          <div className="ml-auto flex items-center gap-4">
+          <div className="ms-auto flex items-center gap-4">
             <Search />
             <ThemeToggle />
             <LocaleSwitcher />
