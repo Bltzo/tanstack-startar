@@ -1,8 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { setResponseStatus } from "@tanstack/react-start/server";
-import * as v from "valibot";
 
-import type { LoginSchemaInput, RegisterSchemaOutput } from "~/schema/auth";
 import type { AppSession } from "~/utils/session";
 import { getUserService } from "~/api/index";
 import { loginSchema, registerSchema } from "~/schema/auth";
@@ -17,7 +15,7 @@ export const getUserSession = createServerFn({ method: "GET" }).handler(
 );
 
 export const login = createServerFn({ method: "POST" })
-  .inputValidator((payload: LoginSchemaInput) => v.parse(loginSchema, payload))
+  .inputValidator(loginSchema)
   .handler(async ({ data }) => {
     try {
       const session = await getAppSession();
@@ -38,9 +36,7 @@ export const login = createServerFn({ method: "POST" })
   });
 
 export const register = createServerFn({ method: "POST" })
-  .inputValidator((payload: RegisterSchemaOutput) =>
-    v.parse(registerSchema, payload),
-  )
+  .inputValidator(registerSchema)
   .handler(async ({ data }) => {
     try {
       const session = await getAppSession();

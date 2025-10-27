@@ -30,8 +30,7 @@ function onError(error: Error) {
       }
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_e) {
-      console.log("Failed to parse error message", error.message);
-      // noop
+      console.error("Failed to parse error message", error.message);
     }
   }
   toast(m.notificationErrorTitle(), {

@@ -13,9 +13,9 @@ interface DashboardLayoutProps {
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <div className="bg-background min-h-screen">
+    <div className="min-h-screen bg-background">
       {/* Top Navigation */}
-      <header className="border-border border-b">
+      <header className="border-b border-border">
         <div className="flex h-16 items-center gap-4 px-4">
           <MainNav />
           <div className="ml-auto flex items-center gap-4">
@@ -26,7 +26,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
         </div>
         {/* Secondary Navigation */}
-        <div className="border-border bg-muted/50 border-t">
+        <div className="border-t border-border bg-muted/50">
           <div className="px-4">
             <SideNav />
           </div>

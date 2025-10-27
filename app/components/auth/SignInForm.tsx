@@ -74,7 +74,7 @@ export function SignInForm() {
                   {...field}
                 />
               </FormControl>
-              <FormMessage className="text-destructive text-sm" />
+              <FormMessage className="text-sm text-destructive" />
             </FormItem>
           )}
         />
@@ -93,21 +93,21 @@ export function SignInForm() {
                   {...field}
                 />
               </FormControl>
-              <FormMessage className="text-destructive text-sm" />
+              <FormMessage className="text-sm text-destructive" />
             </FormItem>
           )}
         />
         <div className="text-left">
           <Button
             variant="link"
-            className="text-muted-foreground hover:text-foreground h-auto p-0 font-medium"
+            className="h-auto p-0 font-medium text-muted-foreground hover:text-foreground"
           >
             {m.authSignInFormForgotPassword()}
           </Button>
         </div>
         <Button
           type="submit"
-          className="text-foreground w-full bg-[#FF5B5B] font-medium hover:bg-[#FF4D4D]"
+          className="w-full bg-[#FF5B5B] font-medium text-foreground hover:bg-[#FF4D4D]"
           disabled={isSubmitting}
         >
           {isSubmitting
@@ -115,7 +115,7 @@ export function SignInForm() {
             : m.authSignInFormSubmit()}
         </Button>
 
-        <p className="text-muted-foreground text-center text-sm">
+        <p className="text-center text-sm text-muted-foreground">
           {m.authSignInFormCreateAccount()}{" "}
           <Button
             type="button"

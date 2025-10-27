@@ -25,7 +25,7 @@ export function MainNav() {
                 href={item.href}
                 className={cn(
                   navigationMenuTriggerStyle(),
-                  "text-muted-foreground hover:bg-muted hover:text-foreground bg-transparent",
+                  "bg-transparent text-muted-foreground hover:bg-muted hover:text-foreground",
                 )}
               >
                 {item.title}

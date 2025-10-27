@@ -34,7 +34,7 @@ export function SideNav() {
           key={item.href}
           variant="ghost"
           className={cn(
-            "text-muted-foreground hover:bg-muted hover:text-foreground h-12 gap-2 rounded-none",
+            "h-12 gap-2 rounded-none text-muted-foreground hover:bg-muted hover:text-foreground",
             item.href === "/threats" && "bg-muted text-foreground",
           )}
         >
