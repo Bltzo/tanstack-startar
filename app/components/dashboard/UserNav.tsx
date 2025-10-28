@@ -21,8 +21,8 @@ export function UserNav() {
   const router = useRouter();
   const handleLogout = useCallback(async () => {
     await logout();
-    await router.invalidate();
-    await router.navigate({ to: "/" });
+    router.invalidate();
+    router.navigate({ to: "/" });
   }, [router]);
 
   return (

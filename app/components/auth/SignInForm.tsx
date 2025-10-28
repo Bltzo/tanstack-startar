@@ -30,7 +30,7 @@ export function SignInForm() {
       toast(m.authSignInSuccessTitle(), {
         description: m.authSignInSuccessMessage(),
       });
-      await router.invalidate();
+      router.invalidate();
       router.navigate({ to: "/dashboard" });
     },
   });

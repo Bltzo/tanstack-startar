@@ -1,7 +1,6 @@
 {
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "always"
-    // "source.organizeImports": "explicit"
   },
   "[typescript,typescriptreact,javascript,typescriptreact,css,scss,markdown,html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"

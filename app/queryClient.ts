@@ -33,7 +33,7 @@ function onError(error: Error) {
       console.error("Failed to parse error message", error.message);
     }
   }
-  toast(m.notificationErrorTitle(), {
+  toast.error(m.notificationErrorTitle(), {
     description: getMessageFromError(error),
   });
 }

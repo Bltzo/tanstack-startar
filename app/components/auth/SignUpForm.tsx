@@ -37,8 +37,8 @@ export function SignUpForm() {
       toast(m.authSignUpSuccessTitle(), {
         description: m.authSignUpSuccessMessage(),
       });
-      await router.invalidate();
-      await router.navigate({ to: "/dashboard" });
+      router.invalidate();
+      router.navigate({ to: "/dashboard" });
     },
   });
 

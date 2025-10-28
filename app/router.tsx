@@ -14,6 +14,7 @@ export function getRouter() {
     scrollRestoration: true,
     defaultErrorComponent: DefaultCatchBoundary,
     defaultNotFoundComponent: () => <NotFound />,
+    defaultStructuralSharing: true,
   });
   setupRouterSsrQueryIntegration({
     router,
