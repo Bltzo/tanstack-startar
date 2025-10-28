@@ -5,7 +5,10 @@ import { afterEach } from "vitest";
 
 import { setLocale } from "~/i18n/runtime";
 
-setLocale("en");
+async function setup() {
+  await setLocale("en");
+}
+setup();
 afterEach(() => {
   cleanup();
 });

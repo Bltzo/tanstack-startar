@@ -68,9 +68,9 @@ export const Route = createRootRouteWithContext<AppRouterContext>()({
         content: "width=device-width, initial-scale=1",
       },
       ...seo({
-        title: "ThreatVerse",
+        title: "Tanstack Startar",
         description:
-          "ThreatVerse is a platform for sharing and discussing cybersecurity threats.",
+          "A starter template for building full-stack applications with Tanstack Router, React Query, and React Startar.",
       }),
     ],
     links: [

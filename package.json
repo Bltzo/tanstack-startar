@@ -8,7 +8,7 @@
     "dev": "pnpm with-env vite dev",
     "build": "pnpm with-env vite build",
     "start": "pnpm with-env node .output/server/index.mjs",
-    "lint": "pnpm lint:i18n && eslint",
+    "lint": "oxlint --type-aware",
     "test": "pnpm with-env vitest",
     "coverage": "pnpm with-env vitest run --coverage",
     "format": "prettier --check .",
@@ -51,16 +51,14 @@
     "valibot-env": "^1.0.0"
   },
   "devDependencies": {
-    "@eslint/compat": "^1.4.0",
-    "@eslint/js": "^9.38.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@inlang/paraglide-js": "^2.4.0",
+    "@oxlint/migrate": "^1.24.0",
     "@playwright/test": "^1.56.1",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/postcss": "^4.1.16",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "4.1.14",
-    "@tanstack/eslint-plugin-router": "^1.133.19",
     "@tanstack/react-router-devtools": "^1.133.32",
     "@tanstack/vite-config": "^0.4.0",
     "@testing-library/react": "^16.3.0",
@@ -73,14 +71,11 @@
     "@vitest/browser": "^4.0.3",
     "@vitest/ui": "^4.0.3",
     "dotenv-cli": "^10.0.0",
-    "eslint": "^9.38.0",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.0.1",
     "happy-dom": "^20.0.8",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.6",
+    "oxlint": "^1.24.0",
+    "oxlint-tsgolint": "^0.3.0",
     "playwright": "^1.56.1",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
@@ -89,7 +84,6 @@
     "tailwindcss-animate": "^1.0.7",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.2",
     "vite": "^7.1.12",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^4.0.3",
@@ -99,7 +93,7 @@
   "lint-staged": {
     "*": "prettier --ignore-unknown --write",
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix"
+      "oxlint --type-aware --fix"
     ]
   },
   "packageManager": "pnpm@10.19.0",

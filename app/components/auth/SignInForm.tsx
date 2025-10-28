@@ -50,7 +50,7 @@ export function SignInForm() {
   };
   const isSubmitting = form.formState.isSubmitting;
   const handleSignUp = useCallback(() => {
-    router.navigate({ to: "/sign-up" });
+    void router.navigate({ to: "/sign-up" });
   }, [router]);
 
   return (

@@ -22,7 +22,7 @@ export function UserNav() {
   const handleLogout = useCallback(async () => {
     await logout();
     await router.invalidate();
-    router.navigate({ to: "/" });
+    await router.navigate({ to: "/" });
   }, [router]);
 
   return (

@@ -38,7 +38,7 @@ export function SignUpForm() {
         description: m.authSignUpSuccessMessage(),
       });
       await router.invalidate();
-      router.navigate({ to: "/dashboard" });
+      await router.navigate({ to: "/dashboard" });
     },
   });
 
