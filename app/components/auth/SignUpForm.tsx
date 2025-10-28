@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/start";
+import { useServerFn } from "@tanstack/react-start";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -37,7 +37,7 @@ export function SignUpForm() {
       toast(m.authSignUpSuccessTitle(), {
         description: m.authSignUpSuccessMessage(),
       });
-      await router.invalidate();
+      router.invalidate();
       router.navigate({ to: "/dashboard" });
     },
   });
@@ -120,7 +120,7 @@ export function SignUpForm() {
               <div className="flex gap-2">
                 <FormControl>
                   <Select defaultValue="+20">
-                    <SelectTrigger className="border-border bg-muted/50 text-foreground w-[80px]">
+                    <SelectTrigger className="w-[80px] border-border bg-muted/50 text-foreground">
                       <SelectValue placeholder={m.authSignUpFormPhoneCode()} />
                     </SelectTrigger>
                     <SelectContent>
@@ -141,7 +141,7 @@ export function SignUpForm() {
                       autoComplete="tel"
                       {...field}
                     />
-                    <FormMessage className="text-destructive mt-1 text-sm" />
+                    <FormMessage className="mt-1 text-sm text-destructive" />
                   </div>
                 </FormControl>
               </div>
@@ -230,7 +230,7 @@ export function SignUpForm() {
         />
         <Button
           type="submit"
-          className="text-foreground w-full bg-[#FF5B5B] font-medium hover:bg-[#FF4D4D]"
+          className="w-full bg-[#FF5B5B] font-medium text-foreground hover:bg-[#FF4D4D]"
           disabled={isSubmitting}
         >
           {isSubmitting
@@ -238,7 +238,7 @@ export function SignUpForm() {
             : m.authSignUpFormSubmit()}
         </Button>
 
-        <p className="text-muted-foreground text-center text-sm">
+        <p className="text-center text-sm text-muted-foreground">
           {m.authSignUpFormHaveAccount()}{" "}
           <Button
             type="button"

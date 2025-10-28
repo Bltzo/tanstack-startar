@@ -15,7 +15,6 @@ export const loginSchema = v.object({
   password: passwordSchema,
 });
 export type LoginSchemaOutput = v.InferOutput<typeof loginSchema>;
-export type LoginSchemaInput = v.InferInput<typeof loginSchema>;
 
 export const forgotPasswordSchema = v.object({
   email: emailSchema,

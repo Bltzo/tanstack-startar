@@ -1,9 +1,14 @@
-import { MutationCache, QueryCache, QueryClient } from "@tanstack/react-query";
+import {
+  isServer,
+  MutationCache,
+  QueryCache,
+  QueryClient,
+} from "@tanstack/react-query";
 import { toast } from "sonner";
 import superjson from "superjson";
 
 import * as m from "~/i18n/messages";
-import { getMessageFromError } from "./utils/error";
+import { getMessageFromError } from "~/utils/error";
 
 function onError(error: Error) {
   if (typeof error.message === "string") {
@@ -25,7 +30,7 @@ function onError(error: Error) {
       }
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_e) {
-      // noop
+      console.error("Failed to parse error message", error.message);
     }
   }
   toast.error(m.notificationErrorTitle(), {
@@ -33,24 +38,52 @@ function onError(error: Error) {
   });
 }
 
-export const queryClient: QueryClient = new QueryClient({
-  defaultOptions: {
-    dehydrate: { serializeData: superjson.serialize },
-    hydrate: { deserializeData: superjson.deserialize },
+function makeQueryClient(): QueryClient {
+  const queryClient: QueryClient = new QueryClient({
+    defaultOptions: {
+      dehydrate: { serializeData: superjson.serialize },
+      hydrate: { deserializeData: superjson.deserialize },
 
-    queries: {
-      refetchOnReconnect: () => !queryClient.isMutating(),
+      queries: {
+        refetchOnReconnect: () => !queryClient.isMutating(),
+      },
     },
-  },
-  queryCache: new QueryCache({
-    onError,
-  }),
-  mutationCache: new MutationCache({
-    onError,
-    onSettled: () => {
-      if (queryClient.isMutating() === 1) {
-        return queryClient.invalidateQueries();
-      }
-    },
-  }),
-});
+    queryCache: new QueryCache({
+      onError,
+    }),
+    mutationCache: new MutationCache({
+      onError,
+      onSettled: () => {
+        if (queryClient.isMutating() === 1) {
+          return queryClient.invalidateQueries({
+            exact: false,
+            type: "all",
+          });
+        }
+      },
+    }),
+  });
+
+  return queryClient;
+}
+
+let browserQueryClient: QueryClient | undefined = undefined;
+
+function getQueryClient(): QueryClient {
+  if (isServer) {
+    // Server: always make a new query client
+    return makeQueryClient();
+  } else {
+    // Browser: make a new query client if we don't already have one
+    // This is very important, so we don't re-make a new client if React
+    // suspends during the initial render. This may not be needed if we
+    // have a suspense boundary BELOW the creation of the query client
+    if (!browserQueryClient) {
+      browserQueryClient = makeQueryClient();
+    }
+
+    return browserQueryClient;
+  }
+}
+
+export const queryClient = getQueryClient();

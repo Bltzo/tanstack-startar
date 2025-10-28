@@ -1,21 +1,12 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "always"
-    // "source.organizeImports": "explicit"
+    "source.fixAll.oxc": "always"
   },
-  "eslint.workingDirectories": [
-    {
-      "mode": "auto"
-    }
-  ],
   "[typescript,typescriptreact,javascript,typescriptreact,css,scss,markdown,html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.formatOnSave": true,
-  "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
-  "eslint.runtime": "node",
 
-  "eslint.useFlatConfig": true,
   "prettier.ignorePath": ".gitignore",
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],

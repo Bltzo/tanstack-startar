@@ -14,7 +14,6 @@ export const Route = createFileRoute("/_dashboard")({
         },
       });
     }
-    return context;
   },
   loader: async ({ context }) => {
     if (context.session?.isAuthenticated) {

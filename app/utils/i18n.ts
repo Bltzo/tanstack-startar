@@ -1,5 +1,5 @@
-import type { AvailableLanguageTag } from "~/i18n/runtime";
-import { availableLanguageTags, sourceLanguageTag } from "~/i18n/runtime";
+import type { Locale } from "~/i18n/runtime";
+import { baseLocale, locales } from "~/i18n/runtime";
 import { negotiateLanguagePreferences } from "./acceptHeader";
 
 export const LOCAL_STORAGE_KEY = "language-tag";
@@ -35,10 +35,7 @@ export function getLanguageCookieFromRequest(req: Request) {
 
 export function getLanguageFromHeaders(req: Request) {
   const acceptLanguage = req.headers.get("Accept-Language");
-  const langs = negotiateLanguagePreferences(
-    acceptLanguage,
-    availableLanguageTags,
-  );
+  const langs = negotiateLanguagePreferences(acceptLanguage, locales);
   return langs[0];
 }
 
@@ -46,33 +43,33 @@ export function detectLanguageFromRequest(
   req: Request,
   {
     forceLanguage,
-    defaultLanguage = sourceLanguageTag,
+    defaultLanguage = baseLocale,
   }: LanguageDetectorScriptConfig = {},
-): AvailableLanguageTag {
+): Locale {
   if (forceLanguage) {
     return forceLanguage;
   }
   const value =
     getLanguageCookieFromRequest(req) ?? getLanguageFromHeaders(req);
   if (!value) {
-    return defaultLanguage as AvailableLanguageTag;
+    return defaultLanguage as Locale;
   }
-  return normalizeLocaleTag(value) as AvailableLanguageTag;
+  return normalizeLocaleTag(value) as Locale;
 }
 
 export interface LanguageDetectorScriptConfig {
-  forceLanguage?: AvailableLanguageTag;
-  defaultLanguage?: AvailableLanguageTag;
+  forceLanguage?: Locale;
+  defaultLanguage?: Locale;
   localStorageKey?: string;
   cookieKey?: string;
 }
 
 export function detectLanguageOnClient({
-  defaultLanguage = sourceLanguageTag,
+  defaultLanguage = baseLocale,
   localStorageKey = LOCAL_STORAGE_KEY,
   cookieKey = COOKIE_KEY,
   forceLanguage,
-}: LanguageDetectorScriptConfig = {}): AvailableLanguageTag {
+}: LanguageDetectorScriptConfig = {}): Locale {
   if (forceLanguage) {
     return forceLanguage;
   }
@@ -87,7 +84,7 @@ export function detectLanguageOnClient({
     })() ||
     navigator.language ||
     defaultLanguage;
-  return normalizeLocaleTag(language) as AvailableLanguageTag;
+  return normalizeLocaleTag(language) as Locale;
 }
 
 export function getLocaleDetectorScript({

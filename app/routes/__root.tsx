@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import type { QueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import { lazy, Suspense } from "react";
@@ -12,26 +13,19 @@ import { ThemeProvider } from "next-themes";
 import type { AppSession } from "~/utils/session";
 import { Toaster } from "~/components/ui/sonner";
 import { env } from "~/env";
-import { languageTag, setLanguageTag } from "~/i18n/runtime";
+import { getLocale } from "~/i18n/runtime";
 import { getUserProfileQuery } from "~/queries/user";
-import { queryClient } from "~/queryClient";
 import { getUserSession } from "~/server/auth.server";
 import appCss from "~/styles/globals.css?url";
-import { detectLanguageOnClient } from "~/utils/i18n";
 import { DefaultCatchBoundary } from "../components/DefaultCatchBoundary";
 import { NotFound } from "../components/NotFound";
 import { seo } from "../utils/seo";
-
-if (typeof window !== "undefined") {
-  const language = detectLanguageOnClient();
-  setLanguageTag(language);
-}
 
 const TanStackRouterDevtools = env.PROD
   ? () => null // Render nothing in production
   : lazy(() =>
       // Lazy load in development
-      import("@tanstack/router-devtools").then((res) => ({
+      import("@tanstack/react-router-devtools").then((res) => ({
         default: res.TanStackRouterDevtools,
         // For Embedded Mode
         // default: res.TanStackRouterDevtoolsPanel
@@ -52,16 +46,14 @@ interface AppRouterContext {
 }
 
 export const Route = createRootRouteWithContext<AppRouterContext>()({
-  beforeLoad: async ({ context }) => {
+  beforeLoad: async () => {
     const session = (await getUserSession()) as AppSession | undefined;
     return {
-      ...context,
-      queryClient,
       session,
     };
   },
   loader: async ({ context }) => {
-    const { session } = context;
+    const { session, queryClient } = context;
     if (session && session.isAuthenticated) {
       await queryClient.ensureQueryData(getUserProfileQuery);
     }
@@ -76,9 +68,9 @@ export const Route = createRootRouteWithContext<AppRouterContext>()({
         content: "width=device-width, initial-scale=1",
       },
       ...seo({
-        title: "ThreatVerse",
+        title: "Tanstack Startar",
         description:
-          "ThreatVerse is a platform for sharing and discussing cybersecurity threats.",
+          "A starter template for building full-stack applications with Tanstack Router, React Query, and React Startar.",
       }),
     ],
     links: [
@@ -125,6 +117,7 @@ export const Route = createRootRouteWithContext<AppRouterContext>()({
   },
   notFoundComponent: () => <NotFound />,
   component: RootComponent,
+  shellComponent: RootDocument,
 });
 
 function RootComponent() {
@@ -140,7 +133,7 @@ interface RootDocumentProps {
 }
 
 function RootDocument({ children }: RootDocumentProps) {
-  const lang = languageTag();
+  const lang = getLocale();
 
   return (
     <html

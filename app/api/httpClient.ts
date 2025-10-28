@@ -14,7 +14,7 @@ export const httpClient = axios.create({
   },
 });
 
-let session: AppSession | undefined = undefined;
+let session: Partial<AppSession> | undefined = undefined;
 httpClient.interceptors.request.use(async (config) => {
   if (typeof session === "undefined") {
     session = await getUserSession();

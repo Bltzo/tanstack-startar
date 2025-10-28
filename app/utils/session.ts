@@ -1,4 +1,4 @@
-import { setResponseStatus, useSession } from "vinxi/http";
+import { setResponseStatus, useSession } from "@tanstack/react-start/server";
 
 import type { UserProfile } from "~/api/models";
 import { env } from "~/env";
@@ -20,7 +20,7 @@ export async function getAccessTokenFromSession(): Promise<string> {
   const session = await getAppSession();
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (session.data && session.data.isAuthenticated) {
-    return session.data.accessToken;
+    return session.data.accessToken ?? "";
   }
   return "";
 }

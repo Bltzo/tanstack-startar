@@ -17,8 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./app/*"]
-    },
-    "types": ["@vitest/browser/providers/playwright"]
+    }
   },
   "include": ["."],
   "exclude": ["node_modules"]

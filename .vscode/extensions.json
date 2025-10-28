@@ -1,12 +1,12 @@
 {
   "recommendations": [
     "dbaeumer.vscode-eslint",
-    "expo.vscode-expo-tools",
     "esbenp.prettier-vscode",
     "yoavbls.pretty-ts-errors",
     "bradlc.vscode-tailwindcss",
     "vitest.explorer",
     "ms-playwright.playwright",
-    "inlang.vs-code-extension"
+    "inlang.vs-code-extension",
+    "oxc.oxc-vscode"
   ]
 }

@@ -21,7 +21,7 @@ export function UserNav() {
   const router = useRouter();
   const handleLogout = useCallback(async () => {
     await logout();
-    await router.invalidate();
+    router.invalidate();
     router.navigate({ to: "/" });
   }, [router]);
 
@@ -39,7 +39,7 @@ export function UserNav() {
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
-            className="hover:bg-muted relative h-8 w-8 rounded-full"
+            className="relative h-8 w-8 rounded-full hover:bg-muted"
           >
             <Avatar className="h-8 w-8">
               <AvatarImage src="https://github.com/shadcn.png" alt="@alexim" />
@@ -51,7 +51,7 @@ export function UserNav() {
           <DropdownMenuLabel>
             <div className="flex flex-col space-y-1">
               <p className="text-sm leading-none font-medium">{data?.name}</p>
-              <p className="text-muted-foreground text-xs leading-none">
+              <p className="text-xs leading-none text-muted-foreground">
                 {data?.email}
               </p>
             </div>

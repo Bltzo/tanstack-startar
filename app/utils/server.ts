@@ -1,5 +1,5 @@
+import { setResponseStatus } from "@tanstack/react-start/server";
 import { isAxiosError } from "axios";
-import { setResponseStatus } from "vinxi/http";
 
 import { getMessageFromError } from "./error";
 

@@ -1,18 +1,12 @@
-import { defineWorkspace } from "vitest/config";
+import { defineConfig } from "vitest/config";
 
-export default defineWorkspace([
+export default [
   "vitest.config.ts",
-  {
+  defineConfig({
     test: {
       include: ["**/*.browser.{test,spec}.{ts,tsx}"],
       name: "browser",
-      browser: {
-        enabled: false,
-        name: "chromium",
-        provider: "playwright",
-        // https://playwright.dev
-        providerOptions: {},
-      },
+      browser: { enabled: false },
     },
-  },
-]);
+  }),
+];
