@@ -12,7 +12,7 @@ This project is a template for building applications using the Tanstack framewor
 - **React hook form**: Form state management.
 - **i18next**: Internationalization framework for React.
 - **Vitest**: A Vite-native unit testing framework.
-- **ESLint**: A tool for identifying and fixing problems in JavaScript code.
+- **Oxlint**: A tool for identifying and fixing problems in JavaScript code.
 - **Prettier**: An opinionated code formatter.
 
 ## Prerequisites
@@ -50,7 +50,7 @@ This project is a template for building applications using the Tanstack framewor
 - **`pnpm dev`**: Starts the development server.
 - **`pnpm build`**: the project for production.
 - **`pnpm start`**: Starts the production server.
-- **`pnpm lint`**: Runs ESLint to check for linting errors.
+- **`pnpm lint`**: Runs Oxlint to check for linting errors.
 - **`pnpm test`**: Runs the test suite using Vitest.
 - **`pnpm coverage`**: Runs the test suite and generates a coverage report.
 - **`pnpm format`**: Checks the code formatting using Prettier.
