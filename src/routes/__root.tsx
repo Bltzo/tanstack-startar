@@ -16,9 +16,9 @@ import { env } from "~/env";
 import { getLocale } from "~/i18n/runtime";
 import { getUserProfileQuery } from "~/queries/user";
 import { getUserSession } from "~/server/auth.server";
-import appCss from "~/styles/globals.css?url";
 import { DefaultCatchBoundary } from "../components/DefaultCatchBoundary";
 import { NotFound } from "../components/NotFound";
+import appCss from "../styles.css?url";
 import { seo } from "../utils/seo";
 
 const TanStackRouterDevtools = env.PROD
@@ -133,13 +133,11 @@ interface RootDocumentProps {
 }
 
 function RootDocument({ children }: RootDocumentProps) {
-  const lang = getLocale();
-
   return (
     <html
       suppressHydrationWarning
-      lang={lang}
-      dir={lang.startsWith("ar") ? "rtl" : "ltr"}
+      lang={getLocale()}
+      dir={getLocale().startsWith("ar") ? "rtl" : "ltr"}
     >
       <head>
         <HeadContent />

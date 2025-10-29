@@ -6,7 +6,6 @@ export default defineConfig({
   plugins: [react(), viteTsConfigPaths({ projects: ["./tsconfig.json"] })],
   test: {
     exclude: [...configDefaults.exclude, "e2e/**/*"],
-    // reporters: ["default", "html"],
     environment: "happy-dom",
     setupFiles: ["happy-dom.setup.ts"],
   },
