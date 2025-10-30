@@ -11,15 +11,15 @@ import {
 import { ThemeProvider } from "next-themes";
 
 import type { AppSession } from "~/utils/session";
+import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary";
+import { NotFound } from "~/components/NotFound";
 import { Toaster } from "~/components/ui/sonner";
 import { env } from "~/env";
 import { getLocale } from "~/i18n/runtime";
 import { getUserProfileQuery } from "~/queries/user";
 import { getUserSession } from "~/server/auth.server";
-import { DefaultCatchBoundary } from "../components/DefaultCatchBoundary";
-import { NotFound } from "../components/NotFound";
-import appCss from "../styles.css?url";
-import { seo } from "../utils/seo";
+import appCss from "~/styles.css?url";
+import { seo } from "~/utils/seo";
 
 const TanStackRouterDevtools = env.PROD
   ? () => null // Render nothing in production
@@ -116,13 +116,9 @@ export const Route = createRootRouteWithContext<AppRouterContext>()({
     );
   },
   notFoundComponent: () => <NotFound />,
-  component: RootComponent,
+  component: () => <Outlet />,
   shellComponent: RootDocument,
 });
-
-function RootComponent() {
-  return <Outlet />;
-}
 
 interface RootDocumentProps {
   children: ReactNode;
