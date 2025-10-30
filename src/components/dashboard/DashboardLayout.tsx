@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { ClientOnly } from "@tanstack/react-router";
 
 import { MainNav } from "~/components/dashboard/MainNav";
 import { LocaleSwitcher } from "../theme/LanguageSwitcher";
@@ -18,9 +17,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       {/* Top Navigation */}
       <header className="border-b border-border">
         <div className="flex h-16 items-center gap-4 px-4">
-          <ClientOnly>
-            <MainNav />
-          </ClientOnly>
+          <MainNav />
           <div className="ms-auto flex items-center gap-4">
             <Search />
             <ThemeToggle />
