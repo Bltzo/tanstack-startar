@@ -12,7 +12,7 @@
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
     ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
-  "tailwindCSS.experimental.configFile": "./app/styles/globals.css",
+  "tailwindCSS.experimental.configFile": "./src/styles.css",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "[ignore]": {
@@ -20,5 +20,8 @@
   },
   "files.watcherExclude": {
     "**/routeTree.gen.ts": true
-  }
+  },
+
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.importModuleSpecifier": "non-relative"
 }

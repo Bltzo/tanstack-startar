@@ -201,6 +201,6 @@
     "**/*.config.*",
     "**/generated",
     "**/routeTree.gen.ts",
-    "app/i18n/**"
+    "src/i18n/**"
   ]
 }

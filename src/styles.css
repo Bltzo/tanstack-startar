@@ -1,11 +1,9 @@
 @import "tailwindcss";
-/*
-  ---break---
-*/
+
+@import "tw-animate-css";
 @custom-variant dark (&:is(.dark *));
 
 @variant dark (&:is(.dark *));
-@plugin "@tailwindcss/typography";
 
 @theme inline {
   --radius-lg: var(--radius);
