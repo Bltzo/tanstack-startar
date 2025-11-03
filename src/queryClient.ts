@@ -55,10 +55,7 @@ function makeQueryClient(): QueryClient {
       onError,
       onSettled: () => {
         if (queryClient.isMutating() === 1) {
-          return queryClient.invalidateQueries({
-            exact: false,
-            type: "all",
-          });
+          return queryClient.invalidateQueries();
         }
       },
     }),
