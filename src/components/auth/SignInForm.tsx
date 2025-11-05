@@ -1,21 +1,17 @@
 import { useCallback } from "react";
-import { valibotResolver } from "@hookform/resolvers/valibot";
+import { useForm } from "@tanstack/react-form";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import type { LoginSchemaOutput } from "~/schema/auth";
 import { Button } from "~/components/ui/button";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "~/components/ui/form";
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "~/components/ui/field";
 import { Input } from "~/components/ui/input";
 import * as m from "~/i18n/messages";
 import { loginSchema } from "~/schema/auth";
@@ -40,93 +36,107 @@ export function SignInForm() {
       email: "",
       password: "",
     },
-    resolver: valibotResolver(loginSchema),
+    validators: {
+      onSubmit: loginSchema,
+    },
+    onSubmit: async ({ value }) => {
+      await mutateAsync({ data: value });
+    },
   });
 
-  const onSubmit = async (data: LoginSchemaOutput) => {
-    await mutateAsync({
-      data,
-    });
-  };
-  const isSubmitting = form.formState.isSubmitting;
   const handleSignUp = useCallback(() => {
     void router.navigate({ to: "/sign-up" });
   }, [router]);
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-foreground">
-                {m.authSignInFormEmail()}
-              </FormLabel>
-              <FormControl>
+    <form
+      id="sign-in-form"
+      onSubmit={(e) => {
+        e.preventDefault();
+        form.handleSubmit();
+      }}
+      className="space-y-4"
+    >
+      <FieldGroup>
+        <form.Field name="email">
+          {(field) => {
+            const isInvalid =
+              field.state.meta.isTouched && !field.state.meta.isValid;
+            return (
+              <Field data-invalid={isInvalid}>
+                <FieldLabel htmlFor={field.name}>
+                  {m.authSignInFormEmail()}
+                </FieldLabel>
                 <Input
-                  type="text"
+                  id={field.name}
+                  className="border-border bg-muted/50 text-foreground placeholder:text-neutral-600"
+                  name={field.name}
+                  value={field.state.value}
                   inputMode="email"
-                  className="border-border bg-muted/50 text-foreground placeholder:text-neutral-600"
-                  placeholder="Enter your email"
-                  autoComplete="username"
-                  {...field}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  aria-invalid={isInvalid}
+                  placeholder={"Enter your email"}
+                  autoComplete="off"
                 />
-              </FormControl>
-              <FormMessage className="text-sm text-destructive" />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{m.authSignInFormPassword()}</FormLabel>
-              <FormControl>
+                {isInvalid && <FieldError errors={field.state.meta.errors} />}
+              </Field>
+            );
+          }}
+        </form.Field>
+        <form.Field name="password">
+          {(field) => {
+            const isInvalid =
+              field.state.meta.isTouched && !field.state.meta.isValid;
+            return (
+              <Field data-invalid={isInvalid}>
+                <FieldLabel htmlFor={field.name}>
+                  {m.authSignInFormPassword()}
+                </FieldLabel>
                 <Input
+                  id={field.name}
                   className="border-border bg-muted/50 text-foreground placeholder:text-neutral-600"
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
                   type="password"
-                  placeholder="••••••••"
-                  autoComplete="current-password"
-                  {...field}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  placeholder={"••••••••"}
+                  aria-invalid={isInvalid}
                 />
-              </FormControl>
-              <FormMessage className="text-sm text-destructive" />
-            </FormItem>
-          )}
-        />
-        <div className="text-left">
-          <Button
-            variant="link"
-            className="h-auto p-0 font-medium text-muted-foreground hover:text-foreground"
-          >
-            {m.authSignInFormForgotPassword()}
-          </Button>
-        </div>
-        <Button
-          type="submit"
-          className="w-full bg-[#FF5B5B] font-medium text-foreground hover:bg-[#FF4D4D]"
-          disabled={isSubmitting}
-        >
-          {isSubmitting
-            ? m.authSignInFormSubmitting()
-            : m.authSignInFormSubmit()}
-        </Button>
+                {isInvalid && <FieldError errors={field.state.meta.errors} />}
+              </Field>
+            );
+          }}
+        </form.Field>
+      </FieldGroup>
 
-        <p className="text-center text-sm text-muted-foreground">
-          {m.authSignInFormCreateAccount()}{" "}
-          <Button
-            type="button"
-            variant="link"
-            className="h-auto p-0 font-normal text-[#FF5B5B]"
-            onClick={handleSignUp}
-          >
-            {m.authSignInFormSignUp()}
-          </Button>
-        </p>
-      </form>
-    </Form>
+      <div className="text-left">
+        <Button
+          variant="link"
+          className="h-auto p-0 font-medium text-muted-foreground hover:text-foreground"
+        >
+          {m.authSignInFormForgotPassword()}
+        </Button>
+      </div>
+      <Button
+        type="submit"
+        className="w-full bg-[#FF5B5B] font-medium text-foreground hover:bg-[#FF4D4D]"
+      >
+        {m.authSignInFormSubmit()}
+      </Button>
+
+      <p className="text-center text-sm text-muted-foreground">
+        {m.authSignInFormCreateAccount()}{" "}
+        <Button
+          type="button"
+          variant="link"
+          className="h-auto p-0 font-normal text-destructive"
+          onClick={handleSignUp}
+        >
+          {m.authSignInFormSignUp()}
+        </Button>
+      </p>
+    </form>
   );
 }
