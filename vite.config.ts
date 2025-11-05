@@ -2,7 +2,6 @@ import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import { nitroV2Plugin } from "@tanstack/nitro-v2-vite-plugin";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
-import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import viteTsConfigPaths from "vite-tsconfig-paths";
 
@@ -12,8 +11,7 @@ export default defineConfig({
   },
   plugins: [
     tanstackStart(),
-
-    react({
+    viteReact({
       babel: {
         plugins: ["babel-plugin-react-compiler"],
       },
