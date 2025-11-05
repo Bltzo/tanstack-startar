@@ -109,4 +109,18 @@ describe("SignUpForm", () => {
 
     expect(mockNavigate).toHaveBeenCalledTimes(1);
   });
+
+  it("validates email format", async () => {
+    render(<SignUpForm />);
+
+    const emailInput = screen.getByLabelText(m.authSignUpFormEmail());
+    await userEvent.type(emailInput, "invalid-email");
+
+    const submitButton = screen.getByRole("button", {
+      name: m.authSignUpFormSubmit(),
+    });
+    await userEvent.click(submitButton);
+
+    expect(await screen.findByText(m.validationEmail())).toBeInTheDocument();
+  });
 });
