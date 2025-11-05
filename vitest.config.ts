@@ -1,9 +1,9 @@
-import react from "@vitejs/plugin-react";
+import viteReact from "@vitejs/plugin-react";
 import viteTsConfigPaths from "vite-tsconfig-paths";
 import { configDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
-  plugins: [react(), viteTsConfigPaths({ projects: ["./tsconfig.json"] })],
+  plugins: [viteReact(), viteTsConfigPaths({ projects: ["./tsconfig.json"] })],
   test: {
     exclude: [...configDefaults.exclude, "e2e/**/*"],
     environment: "happy-dom",
