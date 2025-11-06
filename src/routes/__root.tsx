@@ -127,7 +127,7 @@ function RootDocument({ children }: RootDocumentProps) {
           <TanStackDevtools
             config={{
               position: "bottom-left",
-              openHotkey: [""],
+              openHotkey: [""], // disable default hotkey (shift + a)
             }}
             plugins={[
               {

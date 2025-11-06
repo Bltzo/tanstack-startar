@@ -19,10 +19,10 @@ import { login } from "~/server/auth.server";
 
 export function SignInForm() {
   const router = useRouter();
-  const { mutateAsync } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: useServerFn(login),
     mutationKey: ["user/login"],
-    onSuccess: async () => {
+    onSuccess: () => {
       toast(m.authSignInSuccessTitle(), {
         description: m.authSignInSuccessMessage(),
       });
@@ -39,13 +39,13 @@ export function SignInForm() {
     validators: {
       onSubmit: loginSchema,
     },
-    onSubmit: async ({ value }) => {
-      await mutateAsync({ data: value });
+    onSubmit: ({ value }) => {
+      mutate({ data: value });
     },
   });
 
   const handleSignUp = useCallback(() => {
-    void router.navigate({ to: "/sign-up" });
+    router.navigate({ to: "/sign-up" });
   }, [router]);
 
   return (
@@ -76,7 +76,7 @@ export function SignInForm() {
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                   aria-invalid={isInvalid}
-                  placeholder={"Enter your email"}
+                  placeholder="Enter your email"
                   autoComplete="off"
                 />
                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
@@ -101,7 +101,7 @@ export function SignInForm() {
                   onBlur={field.handleBlur}
                   type="password"
                   onChange={(e) => field.handleChange(e.target.value)}
-                  placeholder={"••••••••"}
+                  placeholder="••••••••"
                   aria-invalid={isInvalid}
                 />
                 {isInvalid && <FieldError errors={field.state.meta.errors} />}

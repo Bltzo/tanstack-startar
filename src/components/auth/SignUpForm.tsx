@@ -26,10 +26,10 @@ import { register } from "~/server/auth.server";
 
 export function SignUpForm() {
   const router = useRouter();
-  const { mutateAsync } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: useServerFn(register),
     mutationKey: ["user/register"],
-    onSuccess: async () => {
+    onSuccess: () => {
       toast(m.authSignUpSuccessTitle(), {
         description: m.authSignUpSuccessMessage(),
       });
@@ -51,13 +51,13 @@ export function SignUpForm() {
     validators: {
       onSubmit: registerSchema,
     },
-    onSubmit: async ({ value }) => {
-      await mutateAsync({ data: value });
+    onSubmit: ({ value }) => {
+      mutate({ data: value });
     },
   });
 
   const handleSignIn = useCallback(() => {
-    void router.navigate({ to: "/sign-in" });
+    router.navigate({ to: "/sign-in" });
   }, [router]);
 
   return (
