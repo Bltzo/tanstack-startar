@@ -1,44 +1,28 @@
 /// <reference types="vite/client" />
 import type { QueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
-import { lazy, Suspense } from "react";
+import { Suspense } from "react";
+import { TanStackDevtools } from "@tanstack/react-devtools";
+import { FormDevtools } from "@tanstack/react-form-devtools";
+import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
 import {
   createRootRouteWithContext,
   HeadContent,
   Outlet,
   Scripts,
 } from "@tanstack/react-router";
+import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { ThemeProvider } from "next-themes";
 
 import type { AppSession } from "~/utils/session";
 import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary";
 import { NotFound } from "~/components/NotFound";
 import { Toaster } from "~/components/ui/sonner";
-import { env } from "~/env";
 import { getLocale } from "~/i18n/runtime";
 import { getUserProfileQuery } from "~/queries/user";
 import { getUserSession } from "~/server/auth.server";
 import appCss from "~/styles.css?url";
 import { seo } from "~/utils/seo";
-
-const TanStackRouterDevtools = env.PROD
-  ? () => null // Render nothing in production
-  : lazy(() =>
-      // Lazy load in development
-      import("@tanstack/react-router-devtools").then((res) => ({
-        default: res.TanStackRouterDevtools,
-        // For Embedded Mode
-        // default: res.TanStackRouterDevtoolsPanel
-      })),
-    );
-
-const ReactQueryDevtools = env.PROD
-  ? () => null
-  : lazy(() =>
-      import("@tanstack/react-query-devtools").then((res) => ({
-        default: res.ReactQueryDevtools,
-      })),
-    );
 
 interface AppRouterContext {
   session?: AppSession;
@@ -140,8 +124,29 @@ function RootDocument({ children }: RootDocumentProps) {
           <Toaster />
         </ThemeProvider>
         <Suspense fallback={null}>
-          <TanStackRouterDevtools position="bottom-right" />
-          <ReactQueryDevtools buttonPosition="bottom-left" />
+          <TanStackDevtools
+            config={{
+              position: "bottom-left",
+              openHotkey: [""], // disable default hotkey (shift + a)
+            }}
+            plugins={[
+              {
+                name: "TanStack Form",
+                render: <FormDevtools />,
+                defaultOpen: true,
+              },
+              {
+                name: "TanStack Router",
+                render: <TanStackRouterDevtoolsPanel />,
+                defaultOpen: false,
+              },
+              {
+                name: "TanStack Query",
+                render: <ReactQueryDevtoolsPanel />,
+                defaultOpen: true,
+              },
+            ]}
+          />
         </Suspense>
         <Scripts />
       </body>
