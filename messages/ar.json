@@ -51,6 +51,7 @@
   "validationEmail": "يرجى إدخال عنوان بريد إلكتروني صالح",
   "validationMinLength": "يجب أن تحتوي هذه الخانة على {count} أحرف على الأقل",
   "validationPasswordMismatch": "كلمتا المرور غير متطابقتين",
+  "validationMobileNumberOnly": "يجب أن يكون هاتفك مكون من أرقام فقط",
   "notificationClose": "إغلاق",
   "notificationSuccessTitle": "نجاح",
   "notificationSuccessMessage": "تم تقديم طلبك بنجاح",

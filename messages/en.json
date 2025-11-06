@@ -51,6 +51,7 @@
   "validationEmail": "Please enter a valid email address",
   "validationMinLength": "This field must be at least {count} characters",
   "validationPasswordMismatch": "Passwords do not match",
+  "validationMobileNumberOnly": "Only numbers allowed",
   "notificationClose": "Close",
   "notificationSuccessTitle": "Success",
   "notificationSuccessMessage": "Your request has been successfully submitted",

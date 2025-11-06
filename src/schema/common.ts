@@ -19,6 +19,7 @@ export const usernameSchema = v.pipe(
 
 export const mobileNumberSchema = v.pipe(
   v.string(m.validationRequired()),
+  v.regex(/^\d+$/, m.validationMobileNumberOnly()),
   v.minLength(10, m.validationMinLength({ count: 10 })),
 );
 
