@@ -11,13 +11,13 @@ export default defineConfig({
     port: 3000,
   },
   plugins: [
+    devtools(), // Keep it first in the plugins array.
     tanstackStart(),
     viteReact({
       babel: {
         plugins: ["babel-plugin-react-compiler"],
       },
     }),
-    devtools(),
     paraglideVitePlugin({
       project: "./project.inlang",
       outdir: "./src/i18n",
