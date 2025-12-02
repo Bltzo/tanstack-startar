@@ -3,7 +3,7 @@ import type { QueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import { Suspense } from "react";
 import { TanStackDevtools } from "@tanstack/react-devtools";
-import { FormDevtools } from "@tanstack/react-form-devtools";
+import { FormDevtoolsPanel } from "@tanstack/react-form-devtools";
 import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
 import {
   createRootRouteWithContext,
@@ -132,7 +132,7 @@ function RootDocument({ children }: RootDocumentProps) {
             plugins={[
               {
                 name: "TanStack Form",
-                render: <FormDevtools />,
+                render: <FormDevtoolsPanel />,
                 defaultOpen: true,
               },
               {
