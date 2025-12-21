@@ -264,7 +264,7 @@ export function SignUpForm() {
 
       <Button
         type="submit"
-        className="w-full bg-destructive font-medium text-destructive-foreground hover:bg-destructive/90"
+        className="w-full bg-primary font-medium text-primary-foreground hover:bg-primary/90"
         disabled={form.state.isSubmitting}
       >
         {form.state.isSubmitting
