@@ -121,7 +121,7 @@ export function SignInForm() {
       </div>
       <Button
         type="submit"
-        className="w-full bg-[#FF5B5B] font-medium text-foreground hover:bg-[#FF4D4D]"
+        className="w-full bg-primary font-medium text-primary-foreground hover:bg-primary/90"
       >
         {m.authSignInFormSubmit()}
       </Button>
