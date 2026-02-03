@@ -10,3 +10,5 @@ src/i18n
 dist
 .amplify-hosting
 .turbo
+project.inlang/README.md
+project.inlang/.meta.json
