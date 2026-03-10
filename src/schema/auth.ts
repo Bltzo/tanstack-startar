@@ -27,6 +27,7 @@ export const registerSchema = v.pipe(
     mobile: mobileNumberSchema,
     company: companySchema,
     jobTitle: jobTitleSchema,
+    code: v.string(),
     password: passwordSchema,
     confirmPassword: v.string(),
   }),

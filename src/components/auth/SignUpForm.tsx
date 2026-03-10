@@ -6,20 +6,7 @@ import { toast } from "sonner";
 
 import { useAppForm } from "~/components/common/Form/CustomForms";
 import { Button } from "~/components/ui/button";
-import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from "~/components/ui/field";
-import { Input } from "~/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
+import { FieldGroup } from "~/components/ui/field";
 import * as m from "~/i18n/messages";
 import { registerSchema } from "~/schema/auth";
 import { register } from "~/server/auth.server";
@@ -45,6 +32,7 @@ export function SignUpForm() {
       mobile: "",
       company: "",
       jobTitle: "",
+      code: "",
       password: "",
       confirmPassword: "",
     },
@@ -86,48 +74,30 @@ export function SignUpForm() {
             />
           )}
         </form.AppField>
+        <div className="flex items-end gap-1">
+          <form.AppField name="mobile">
+            {(field) => (
+              <field.InputField
+                label={m.authSignUpFormMobile()}
+                placeholder={m.authSignUpFormMobilePlaceholder()}
+              />
+            )}
+          </form.AppField>
+          <form.AppField name="code">
+            {(field) => (
+              <field.SelectField
+                triggerClassName="max-w-20 mb-[3px]"
+                options={[
+                  { id: "1", name: "+20" },
+                  { id: "2", name: "+44" },
+                  { id: "3", name: "+91" },
+                ]}
+                placeholder={m.authSignUpFormMobilePlaceholder()}
+              />
+            )}
+          </form.AppField>
+        </div>
 
-        <form.Field name="mobile">
-          {(field) => {
-            const isInvalid =
-              field.state.meta.isTouched && !field.state.meta.isValid;
-            return (
-              <Field data-invalid={isInvalid}>
-                <FieldLabel htmlFor={field.name}>
-                  {m.authSignUpFormMobile()}
-                </FieldLabel>
-                <div className="flex gap-2">
-                  <Select defaultValue="+20">
-                    <SelectTrigger className="w-[80px] border-border bg-muted/50 text-foreground">
-                      <SelectValue placeholder={m.authSignUpFormPhoneCode()} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="+1">+1</SelectItem>
-                      <SelectItem value="+20">+20</SelectItem>
-                      <SelectItem value="+44">+44</SelectItem>
-                      <SelectItem value="+91">+91</SelectItem>
-                    </SelectContent>
-                  </Select>
-
-                  <Input
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    inputMode="tel"
-                    type="tel"
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    aria-invalid={isInvalid}
-                    placeholder={m.authSignUpFormMobilePlaceholder()}
-                    autoComplete="off"
-                  />
-                </div>
-
-                {isInvalid && <FieldError errors={field.state.meta.errors} />}
-              </Field>
-            );
-          }}
-        </form.Field>
         <form.AppField name="company">
           {(field) => (
             <field.InputField

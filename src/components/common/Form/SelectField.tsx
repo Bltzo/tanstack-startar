@@ -13,6 +13,7 @@ interface SelectFieldProps {
   label?: string;
   placeholder?: string;
   className?: string;
+  triggerClassName?: string;
   options: { id: string; name: string }[];
   errors?: ({ message?: string } | undefined)[];
 }
@@ -20,12 +21,15 @@ export function SelectField({
   label,
   placeholder = "",
   className = "",
+  triggerClassName = "",
   options,
   errors,
 }: SelectFieldProps) {
   const field = useFieldContext<string>();
   return (
-    <div className="flex flex-col gap-3">
+    <div
+      className={cn("flex flex-col gap-3", { "gap-0": !label || !placeholder })}
+    >
       {label ? (
         <FieldLabel htmlFor={field.name} className="text-base font-semibold">
           {label}
@@ -35,7 +39,7 @@ export function SelectField({
         onValueChange={(e) => field.setValue(e)}
         value={field.state.value}
       >
-        <SelectTrigger>
+        <SelectTrigger className={cn("w-full", triggerClassName)}>
           <SelectValue
             placeholder={placeholder}
             className={cn("py-2", className)}
