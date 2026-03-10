@@ -32,3 +32,8 @@ export const jobTitleSchema = v.pipe(
   v.string(m.validationRequired()),
   v.minLength(2, m.validationMinLength({ count: 2 })),
 );
+
+export const idSchema = v.pipe(
+  v.string(m.validationRequired()),
+  v.uuid(m.validationRequired()),
+);
