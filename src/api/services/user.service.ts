@@ -8,6 +8,7 @@ const fakeUser: RegisterSchemaOutput = {
   password: "fake12345",
   confirmPassword: "fake12345",
   name: "Fake User",
+  code: "+20",
   mobile: "1234567890",
   company: "Fake Company",
   jobTitle: "Fake Job",

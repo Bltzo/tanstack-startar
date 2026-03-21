@@ -1,18 +1,12 @@
 import { useCallback } from "react";
-import { useForm } from "@tanstack/react-form";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 
+import { useAppForm } from "~/components/common/Form/CustomForms";
 import { Button } from "~/components/ui/button";
-import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from "~/components/ui/field";
-import { Input } from "~/components/ui/input";
+import { FieldGroup } from "~/components/ui/field";
 import * as m from "~/i18n/messages";
 import { loginSchema } from "~/schema/auth";
 import { login } from "~/server/auth.server";
@@ -31,7 +25,7 @@ export function SignInForm() {
     },
   });
 
-  const form = useForm({
+  const form = useAppForm({
     defaultValues: {
       email: "",
       password: "",
@@ -58,57 +52,25 @@ export function SignInForm() {
       className="space-y-4"
     >
       <FieldGroup>
-        <form.Field name="email">
-          {(field) => {
-            const isInvalid =
-              field.state.meta.isTouched && !field.state.meta.isValid;
-            return (
-              <Field data-invalid={isInvalid}>
-                <FieldLabel htmlFor={field.name}>
-                  {m.authSignInFormEmail()}
-                </FieldLabel>
-                <Input
-                  id={field.name}
-                  className="border-border bg-muted/50 text-foreground placeholder:text-neutral-600"
-                  name={field.name}
-                  value={field.state.value}
-                  inputMode="email"
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                  aria-invalid={isInvalid}
-                  placeholder="Enter your email"
-                  autoComplete="off"
-                />
-                {isInvalid && <FieldError errors={field.state.meta.errors} />}
-              </Field>
-            );
-          }}
-        </form.Field>
-        <form.Field name="password">
-          {(field) => {
-            const isInvalid =
-              field.state.meta.isTouched && !field.state.meta.isValid;
-            return (
-              <Field data-invalid={isInvalid}>
-                <FieldLabel htmlFor={field.name}>
-                  {m.authSignInFormPassword()}
-                </FieldLabel>
-                <Input
-                  id={field.name}
-                  className="border-border bg-muted/50 text-foreground placeholder:text-neutral-600"
-                  name={field.name}
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  type="password"
-                  onChange={(e) => field.handleChange(e.target.value)}
-                  placeholder="••••••••"
-                  aria-invalid={isInvalid}
-                />
-                {isInvalid && <FieldError errors={field.state.meta.errors} />}
-              </Field>
-            );
-          }}
-        </form.Field>
+        <FieldGroup className="flex flex-col gap-4">
+          <form.AppField name="email">
+            {(field) => (
+              <field.InputField
+                label={m.authSignInFormEmail()}
+                placeholder={m.authSignUpFormEmailPlaceholder()}
+              />
+            )}
+          </form.AppField>
+          <form.AppField name="password">
+            {(field) => (
+              <field.InputField
+                type="password"
+                label={m.authSignInFormPassword()}
+                placeholder="••••••••"
+              />
+            )}
+          </form.AppField>
+        </FieldGroup>
       </FieldGroup>
 
       <div className="text-left">
