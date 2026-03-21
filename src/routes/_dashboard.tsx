@@ -1,8 +1,6 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
 import { DashboardLayout } from "~/components/dashboard/DashboardLayout";
-import { getUserProfileQuery } from "~/queries/user";
-import { queryClient } from "~/queryClient";
 
 export const Route = createFileRoute("/_dashboard")({
   beforeLoad: async ({ context, location }) => {
@@ -13,12 +11,6 @@ export const Route = createFileRoute("/_dashboard")({
           redirect: location.href,
         },
       });
-    }
-  },
-  loader: async ({ context }) => {
-    if (context.session?.isAuthenticated) {
-      // Load user data
-      await queryClient.ensureQueryData(getUserProfileQuery);
     }
   },
   component: DashboardPage,
