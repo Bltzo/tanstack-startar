@@ -11,8 +11,8 @@
     "lint": "pnpm lint:i18n && oxlint --type-aware",
     "test": "pnpm with-env vitest",
     "coverage": "pnpm with-env vitest run --coverage",
-    "format": "prettier --check .",
-    "format:write": "prettier --write .",
+    "format:write": "oxfmt",
+    "format": "oxfmt --check",
     "type-check": "tsc --noEmit",
     "verify": "pnpm format:write && pnpm lint && pnpm type-check",
     "with-env": "dotenv -e .env --",
@@ -75,11 +75,10 @@
     "happy-dom": "^20.5.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
+    "oxfmt": "^0.42.0",
     "oxlint": "^1.43.0",
     "oxlint-tsgolint": "^0.11.4",
     "playwright": "^1.58.1",
-    "prettier": "^3.8.1",
-    "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.1.18",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
@@ -90,7 +89,7 @@
     "vitest-dom": "^0.1.1"
   },
   "lint-staged": {
-    "*": "prettier --ignore-unknown --write",
+    "*": "oxfmt --no-error-on-unmatched-pattern",
     "*.{js,jsx,ts,tsx}": [
       "oxlint --type-aware --fix"
     ]
