@@ -1,0 +1,35 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "sortTailwindcss": {
+    "stylesheet": "./src/styles.css",
+    "functions": ["cn", "cva"]
+  },
+  "importOrder": [
+    "<TYPES>",
+    "^(react/(.*)$)|^(react$)|^(react-native(.*)$)",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "<TYPES>^[.|..|~]",
+    "^~/",
+    "^[../]",
+    "^[./]"
+  ],
+  "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
+  "printWidth": 80,
+  "sortPackageJson": false,
+  "ignorePatterns": [
+    "**/build",
+    "**/public",
+    "pnpm-lock.yaml",
+    "**/generated",
+    "**/routeTree.gen.ts",
+    "src/i18n",
+    ".output",
+    ".nitro",
+    "dist",
+    ".amplify-hosting",
+    ".turbo",
+    "project.inlang/README.md",
+    "project.inlang/.meta.json"
+  ]
+}
