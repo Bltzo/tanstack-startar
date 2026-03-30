@@ -7,7 +7,7 @@ export const Route = createFileRoute("/_auth/sign-up")({
   component: SignUpPage,
 });
 
-export default function SignUpPage() {
+function SignUpPage() {
   return (
     <>
       <div className="mb-8">

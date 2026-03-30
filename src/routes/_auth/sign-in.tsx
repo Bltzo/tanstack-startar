@@ -6,7 +6,7 @@ import * as m from "~/i18n/messages";
 export const Route = createFileRoute("/_auth/sign-in")({
   component: SignInPage,
 });
-export function SignInPage() {
+function SignInPage() {
   return (
     <>
       <div className="mb-8">
