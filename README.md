@@ -13,7 +13,7 @@ This project is a template for building applications using the Tanstack framewor
 - **i18next**: Internationalization framework for React.
 - **Vitest**: A Vite-native unit testing framework.
 - **Oxlint**: A tool for identifying and fixing problems in JavaScript code.
-- **Prettier**: An opinionated code formatter.
+- **Oxfmt**: An opinionated code formatter.
 
 ## Prerequisites
 
@@ -53,8 +53,8 @@ This project is a template for building applications using the Tanstack framewor
 - **`pnpm lint`**: Runs Oxlint to check for linting errors.
 - **`pnpm test`**: Runs the test suite using Vitest.
 - **`pnpm coverage`**: Runs the test suite and generates a coverage report.
-- **`pnpm format`**: Checks the code formatting using Prettier.
-- **`pnpm format:write`**: Formats the code using Prettier.
+- **`pnpm format`**: Checks the code formatting using Oxfmt.
+- **`pnpm format:write`**: Formats the code using Oxfmt.
 - **`pnpm type-check`**: Runs TypeScript type checking.
 
 ## Project Structure
