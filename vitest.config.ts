@@ -3,6 +3,9 @@ import { configDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
   plugins: [viteReact()],
+  resolve: {
+    tsconfigPaths: true,
+  },
   test: {
     exclude: [...configDefaults.exclude, "e2e/**/*"],
     environment: "happy-dom",
