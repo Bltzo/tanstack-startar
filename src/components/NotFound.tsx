@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from "react";
+
 import { Link } from "@tanstack/react-router";
 
 export function NotFound({ children }: PropsWithChildren) {

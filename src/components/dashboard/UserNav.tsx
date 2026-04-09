@@ -1,6 +1,6 @@
-import { useCallback } from "react";
 import { useRouter } from "@tanstack/react-router";
 import { Bell } from "lucide-react";
+import { useCallback } from "react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";

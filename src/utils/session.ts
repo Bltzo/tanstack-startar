@@ -1,6 +1,7 @@
+import type { UserProfile } from "~/api/models";
+
 import { setResponseStatus, useSession } from "@tanstack/react-start/server";
 
-import type { UserProfile } from "~/api/models";
 import { env } from "~/env";
 
 export interface AppSession {

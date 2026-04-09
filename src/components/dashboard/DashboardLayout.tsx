@@ -1,8 +1,10 @@
 import type { ReactNode } from "react";
 
 import { MainNav } from "~/components/dashboard/MainNav";
+
 import { LocaleSwitcher } from "../theme/LanguageSwitcher";
 import { ThemeToggle } from "../theme/ThemeToggle";
+
 import { Search } from "./Search";
 import { SideNav } from "./SideNav";
 import { UserNav } from "./UserNav";

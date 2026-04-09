@@ -4,16 +4,21 @@
     "stylesheet": "./src/styles.css",
     "functions": ["cn", "cva"]
   },
-  "importOrder": [
-    "<TYPES>",
-    "^(react/(.*)$)|^(react$)|^(react-native(.*)$)",
-    "<THIRD_PARTY_MODULES>",
-    "",
-    "<TYPES>^[.|..|~]",
-    "^~/",
-    "^[../]",
-    "^[./]"
-  ],
+  "sortImports": {
+    "groups": [
+      "type", // <TYPES>
+      "external", // React & third-party modules
+      "internal", // @project-q packages
+      "subpath", // @project-q subpaths
+      "parent", // ../ relative imports
+      "sibling", // ./ relative imports
+      "index", // ./index files
+      "style", // CSS / style imports
+      "unknown" // fallback
+    ],
+    "sortSpecifiers": true,
+    "separateGroups": true
+  },
   "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
   "printWidth": 80,
   "sortPackageJson": false,
