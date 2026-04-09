@@ -1,7 +1,8 @@
 /// <reference types="vite/client" />
 import type { QueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
-import { Suspense } from "react";
+import type { AppSession } from "~/utils/session";
+
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { FormDevtoolsPanel } from "@tanstack/react-form-devtools";
 import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
@@ -13,16 +14,17 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { ThemeProvider } from "next-themes";
+import { Suspense } from "react";
 
-import type { AppSession } from "~/utils/session";
 import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary";
 import { NotFound } from "~/components/NotFound";
 import { Toaster } from "~/components/ui/sonner";
 import { getLocale } from "~/i18n/runtime";
 import { getUserProfileQuery } from "~/queries/user";
 import { getUserSession } from "~/server/auth.server";
-import appCss from "~/styles.css?url";
 import { seo } from "~/utils/seo";
+
+import appCss from "~/styles.css?url";
 
 interface AppRouterContext {
   session?: AppSession;

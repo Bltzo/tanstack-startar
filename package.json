@@ -11,7 +11,7 @@
     "lint": "pnpm lint:i18n && oxlint --type-aware",
     "test": "pnpm with-env vitest",
     "coverage": "pnpm with-env vitest run --coverage",
-    "format:write": "oxfmt",
+    "format:write": "oxfmt --write",
     "format": "oxfmt --check",
     "type-check": "tsc --noEmit",
     "verify": "pnpm format:write && pnpm lint && pnpm type-check",

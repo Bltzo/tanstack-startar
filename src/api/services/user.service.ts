@@ -1,6 +1,5 @@
-import type { AxiosInstance } from "axios";
-
 import type { UserProfile } from "../models";
+import type { AxiosInstance } from "axios";
 import type { LoginSchemaOutput, RegisterSchemaOutput } from "~/schema/auth";
 
 const fakeUser: RegisterSchemaOutput = {

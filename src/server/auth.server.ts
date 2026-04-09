@@ -1,7 +1,8 @@
+import type { AppSession } from "~/utils/session";
+
 import { createServerFn } from "@tanstack/react-start";
 import { setResponseStatus } from "@tanstack/react-start/server";
 
-import type { AppSession } from "~/utils/session";
 import { getUserService } from "~/api/index";
 import { loginSchema, registerSchema } from "~/schema/auth";
 import { getAppSession, isAuthenticatedGuard } from "~/utils/session";
