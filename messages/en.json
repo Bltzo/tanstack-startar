@@ -60,5 +60,11 @@
   "notificationWarningTitle": "Warning",
   "notificationWarningMessage": "Please fill all required fields",
   "notificationInfoTitle": "Info",
-  "notificationInfoMessage": "This is an info message"
+  "notificationInfoMessage": "This is an info message",
+  "sidebarDashboardTitle": "Dashboard",
+  "sidebarAnalyticsTitle": "Analytics",
+  "sidebarUsersTitle": "Users",
+  "sidebarToolsTitle": "Tools",
+  "sidebarSettingsTitle": "Settings",
+  "sidebarNavigationTitle": "Navigation"
 }
