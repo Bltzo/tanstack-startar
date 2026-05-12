@@ -7,6 +7,11 @@ import { render } from "~/testUtils";
 
 import { SignUpForm } from "./SignUpForm";
 
+function byRequiredLabel(label: string) {
+  const escaped = label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`^${escaped}\\s*\\*?$`, "i");
+}
+
 const mockNavigate = vi.fn();
 vi.mock("@tanstack/react-router", () => ({
   useRouter: () => ({
@@ -26,20 +31,26 @@ describe("SignUpForm", () => {
   it("renders signup form correctly", async () => {
     render(<SignUpForm />);
 
-    expect(screen.getByLabelText(m.authSignUpFormEmail())).toBeInTheDocument();
     expect(
-      screen.getByLabelText(m.authSignUpFormCompany()),
+      screen.getByLabelText(byRequiredLabel(m.authSignUpFormEmail())),
     ).toBeInTheDocument();
     expect(
-      screen.getByLabelText(m.authSignUpFormJobTitle()),
-    ).toBeInTheDocument();
-    expect(screen.getByLabelText(m.authSignUpFormMobile())).toBeInTheDocument();
-    expect(screen.getByLabelText(m.authSignUpFormName())).toBeInTheDocument();
-    expect(
-      screen.getByLabelText(m.authSignUpFormPassword()),
+      screen.getByLabelText(byRequiredLabel(m.authSignUpFormCompany())),
     ).toBeInTheDocument();
     expect(
-      screen.getByLabelText(m.authSignUpFormConfirmPassword()),
+      screen.getByLabelText(byRequiredLabel(m.authSignUpFormJobTitle())),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText(byRequiredLabel(m.authSignUpFormMobile())),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText(byRequiredLabel(m.authSignUpFormName())),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText(byRequiredLabel(m.authSignUpFormPassword())),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText(byRequiredLabel(m.authSignUpFormConfirmPassword())),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: m.authSignUpFormSubmit() }),
@@ -66,14 +77,26 @@ describe("SignUpForm", () => {
   it("submits form with valid data", async () => {
     render(<SignUpForm />);
 
-    const emailInput = screen.getByLabelText(m.authSignUpFormEmail());
-    const nameInput = screen.getByLabelText(m.authSignUpFormName());
-    const mobileInput = screen.getByLabelText(m.authSignUpFormMobile());
-    const companyInput = screen.getByLabelText(m.authSignUpFormCompany());
-    const jobTitleInput = screen.getByLabelText(m.authSignUpFormJobTitle());
-    const passwordInput = screen.getByLabelText(m.authSignUpFormPassword());
+    const emailInput = screen.getByLabelText(
+      byRequiredLabel(m.authSignUpFormEmail()),
+    );
+    const nameInput = screen.getByLabelText(
+      byRequiredLabel(m.authSignUpFormName()),
+    );
+    const mobileInput = screen.getByLabelText(
+      byRequiredLabel(m.authSignUpFormMobile()),
+    );
+    const companyInput = screen.getByLabelText(
+      byRequiredLabel(m.authSignUpFormCompany()),
+    );
+    const jobTitleInput = screen.getByLabelText(
+      byRequiredLabel(m.authSignUpFormJobTitle()),
+    );
+    const passwordInput = screen.getByLabelText(
+      byRequiredLabel(m.authSignUpFormPassword()),
+    );
     const confirmPasswordInput = screen.getByLabelText(
-      m.authSignUpFormConfirmPassword(),
+      byRequiredLabel(m.authSignUpFormConfirmPassword()),
     );
 
     await userEvent.type(emailInput, "test@example.com");
@@ -114,7 +137,9 @@ describe("SignUpForm", () => {
   it("validates email format", async () => {
     render(<SignUpForm />);
 
-    const emailInput = screen.getByLabelText(m.authSignUpFormEmail());
+    const emailInput = screen.getByLabelText(
+      byRequiredLabel(m.authSignUpFormEmail()),
+    );
     await userEvent.type(emailInput, "invalid-email");
 
     const submitButton = screen.getByRole("button", {

@@ -63,7 +63,6 @@ export function InputField({
           )}
           value={field.state.value}
           placeholder={placeholder ?? ""}
-          required={isRequired}
           aria-required={isRequired}
           onChange={(e) => {
             if (type === "number") {
