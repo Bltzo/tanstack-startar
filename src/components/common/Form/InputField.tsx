@@ -4,6 +4,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 
 import { useFieldContext } from "~/components/common/Form/CustomForms";
+import { useFieldRequired } from "~/components/common/Form/Form";
 import { Button } from "~/components/ui/button";
 import {
   FieldDescription,
@@ -15,6 +16,7 @@ import { cn } from "~/utils/cn";
 
 interface InputFieldProps {
   label?: string;
+  required?: boolean;
   type?: HTMLInputTypeAttribute;
   placeholder?: string;
   className?: string;
@@ -23,6 +25,7 @@ interface InputFieldProps {
 }
 export function InputField({
   label,
+  required,
   type = "text",
   placeholder,
   errors,
@@ -33,12 +36,19 @@ export function InputField({
 
   const isPassword = type === "password";
   const field = useFieldContext<string | number>();
+  const requiredFromSchema = useFieldRequired(field.name);
+  const isRequired = required ?? requiredFromSchema;
 
   return (
     <div className="relative flex w-full flex-col gap-1 text-sm">
       {label && (
         <FieldLabel htmlFor={field.name} className="font-medium">
           {label}
+          {isRequired ? (
+            <span className="ms-1 text-destructive" aria-hidden="true">
+              *
+            </span>
+          ) : null}
         </FieldLabel>
       )}
 
@@ -53,6 +63,8 @@ export function InputField({
           )}
           value={field.state.value}
           placeholder={placeholder ?? ""}
+          required={isRequired}
+          aria-required={isRequired}
           onChange={(e) => {
             if (type === "number") {
               field.handleChange(Number(e.target.value));
@@ -69,7 +81,7 @@ export function InputField({
             type="button"
             onClick={() => setShowPassword(!showPassword)}
             className={cn(
-              "absolute end-0 top-[40%] mb-0 translate-y-[-50%] cursor-pointer pb-0 text-neutral-500 hover:bg-transparent hover:text-foreground",
+              "absolute inset-e-0 top-[40%] mb-0 translate-y-[-50%] cursor-pointer pb-0 text-neutral-500 hover:bg-transparent hover:text-foreground",
             )}
           >
             {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
