@@ -5,6 +5,7 @@ import { useCallback } from "react";
 import { toast } from "sonner";
 
 import { useAppForm } from "~/components/common/Form/CustomForms";
+import { Form } from "~/components/common/Form/Form";
 import { Button } from "~/components/ui/button";
 import { FieldGroup } from "~/components/ui/field";
 import * as m from "~/i18n/messages";
@@ -49,8 +50,9 @@ export function SignUpForm() {
   }, [router]);
 
   return (
-    <form
+    <Form
       id="sign-up-form"
+      schema={registerSchema}
       onSubmit={(e) => {
         e.preventDefault();
         form.handleSubmit();
@@ -155,6 +157,6 @@ export function SignUpForm() {
           {m.authSignUpFormSignIn()}
         </Button>
       </p>
-    </form>
+    </Form>
   );
 }
