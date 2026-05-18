@@ -1,4 +1,5 @@
 import { useFieldContext } from "~/components/common/Form/CustomForms";
+import { useFieldRequired } from "~/components/common/Form/Form";
 import { FieldError, FieldLabel } from "~/components/ui/field";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 
@@ -22,12 +23,18 @@ export function RadioField({
   errors,
 }: RadioFieldProps) {
   const field = useFieldContext<string>();
+  const isRequired = useFieldRequired(field.name);
 
   return (
     <div className="flex w-full flex-col gap-3">
       {label ? (
         <FieldLabel htmlFor={field.name} className="font-bold">
           {label}
+          {isRequired ? (
+            <span className="ms-1 text-destructive" aria-hidden="true">
+              *
+            </span>
+          ) : null}
         </FieldLabel>
       ) : null}
 
