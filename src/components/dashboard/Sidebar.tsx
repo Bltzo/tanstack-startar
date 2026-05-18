@@ -1,4 +1,4 @@
-import { BarChart3, LayoutGrid, Settings, Users, Wrench } from "lucide-react";
+import { LayoutGrid } from "lucide-react";
 
 import { Logo } from "~/components/common/Logo";
 import {
@@ -21,10 +21,6 @@ const SIDEBAR_ITEMS = [
     icon: LayoutGrid,
     isActive: true,
   },
-  { title: m.sidebarAnalyticsTitle(), href: "/analytics", icon: BarChart3 },
-  { title: m.sidebarUsersTitle(), href: "/users", icon: Users },
-  { title: m.sidebarToolsTitle(), href: "/tools", icon: Wrench },
-  { title: m.sidebarSettingsTitle(), href: "/settings", icon: Settings },
 ];
 
 export function DashboardSidebar() {
