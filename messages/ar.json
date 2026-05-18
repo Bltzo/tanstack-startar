@@ -60,5 +60,11 @@
   "notificationWarningTitle": "تحذير",
   "notificationWarningMessage": "يرجى ملء جميع الحقول المطلوبة",
   "notificationInfoTitle": "معلومات",
-  "notificationInfoMessage": "هذه رسالة معلومات"
+  "notificationInfoMessage": "هذه رسالة معلومات",
+  "sidebarDashboardTitle": "البيت بيتك",
+  "sidebarAnalyticsTitle": "التحليلات",
+  "sidebarUsersTitle": "المستخدمين",
+  "sidebarToolsTitle": "الأدوات",
+  "sidebarSettingsTitle": "الإعدادات",
+  "sidebarNavigationTitle": "التنقل"
 }
