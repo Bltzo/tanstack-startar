@@ -11,7 +11,4 @@ runs:
         node-version: ${{ env.NODE_VERSION }}
         cache: "pnpm"
     - shell: bash
-      run: pnpm add -g turbo
-
-    - shell: bash
       run: pnpm install
